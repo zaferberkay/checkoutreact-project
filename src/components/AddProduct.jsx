@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
+import Button from "react-bootstrap/Button";
+import { FaCartPlus } from "react-icons/fa";
 
-function AddProduct({ getProducts, productList }) {
+function AddProduct({ getProducts }) {
   //* POST
 
   const [name, setName] = useState("");
@@ -33,7 +35,7 @@ function AddProduct({ getProducts, productList }) {
       <form onSubmit={handleSubmit} className="  p-2">
         <div className="mb-3">
           <label htmlFor="add-name" className="form-label">
-            Product Name
+            Product Name: {name}
           </label>
           <input
             type="text"
@@ -47,7 +49,7 @@ function AddProduct({ getProducts, productList }) {
         </div>
         <div className="mb-3">
           <label htmlFor="add-price" className="form-label">
-            Product Price
+            Product Price: {price}
           </label>
           <input
             type="number"
@@ -61,7 +63,7 @@ function AddProduct({ getProducts, productList }) {
         </div>
         <div className="mb-3">
           <label htmlFor="add-quantity" className="form-label">
-            Product Quantity
+            Product Quantity: {amount}$
           </label>
           <input
             type="number"
@@ -92,9 +94,9 @@ function AddProduct({ getProducts, productList }) {
           />
         </div>
         <div className="text-center">
-          <button type="submit" className="add-to-cart btn btn-success btn-sm">
-            <i className="fa-solid fa-cart-plus me-2"></i>Add To Cart
-          </button>
+          <Button type="submit" className="add-to-cart btn-sm">
+            <FaCartPlus className="me-2" /> Add To Cart
+          </Button>
         </div>
       </form>
     </div>

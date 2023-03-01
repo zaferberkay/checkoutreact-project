@@ -7,13 +7,12 @@ import CardTotal from "../components/CardTotal";
 
 const Main = () => {
   const [productList, setProductList] = useState([]);
-  const [pending, setPending] = useState(true);
+
   const BASE_URL = "https://6367ad83f5f549f052d9f2e9.mockapi.io/api/products";
   const getProducts = async () => {
     try {
       const { data } = await axios(BASE_URL);
       setProductList(data);
-      setPending(false);
     } catch (error) {
       console.log(error);
     }
@@ -31,12 +30,7 @@ const Main = () => {
       <ButtonBar productList={productList} getProducts={getProducts} />
 
       {productList?.map((item) => (
-        <ProductsCard
-          getProducts={getProducts}
-          pending={pending}
-          {...item}
-          key={item.id}
-        />
+        <ProductsCard getProducts={getProducts} {...item} key={item.id} />
       ))}
       <CardTotal productList={productList} />
     </div>

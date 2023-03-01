@@ -1,7 +1,5 @@
 const Header = () => {
-  return (
-    <center className=" fs-1 fw-bold p-2 text-primary">Shopping Cart</center>
-  );
+  return <center className="header fs-1  fw-bold py-3 ">Shopping Cart</center>;
 };
 
 export default Header;

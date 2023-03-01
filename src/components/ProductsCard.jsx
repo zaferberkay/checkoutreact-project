@@ -1,19 +1,11 @@
-import { Button, Col, Row } from "react-bootstrap";
-import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+
 import { HiMinus, HiPlus } from "react-icons/hi";
 import { FaTrashAlt } from "react-icons/fa";
 import axios from "axios";
 import { useState } from "react";
 
-function ProductsCard({
-  id,
-  name,
-  price,
-  amount,
-  image,
-  getProducts,
-  pending,
-}) {
+function ProductsCard({ id, name, price, amount, image, getProducts }) {
   //*DELETE
   const [quant, setQuant] = useState(amount);
 
@@ -55,66 +47,69 @@ function ProductsCard({
   };
 
   return (
-    <>
-      {pending && (
-        <div className="alert alert-warning fs-3 " role={alert}>
-          Loading...
-        </div>
-      )}
-      <div className="container d-flex justify-content-center align-items-center mb-4">
-        <Row key={id}>
-          <Card style={{ width: "18rem" }}>
-            <Col>
-              <Card.Img
-                className=" mt-3 "
-                variant="top"
-                src={image}
-                alt={name}
-              />
-            </Col>
-            <Col>
-              <Card.Body>
-                <Card.Title>{name}</Card.Title>
-              </Card.Body>
-              <Card.Text className="d-flex justify-content-center  display-4 fw-bold text-danger">
-                $<span> {(price * 0.8).toFixed(2)}</span>
-                <del className="fs-3">{price}</del>
-              </Card.Text>
-              <Card.Body>
-                <div className="d-flex justify-content-center align-items-center border border-3 border-dark rounded  p-2">
-                  <button
+    <div className="container  ">
+      <div className="card mb-3">
+        <div className="row g-0">
+          <div className="col-md-5 d-flex ">
+            <img
+              src={image}
+              className=" img-thumbnail rounded-start"
+              alt={name}
+              title={name}
+            />
+          </div>
+          <div className=" rightback col-md-7 d-flex align-items-center">
+            <div className="card-body  ">
+              <h5 className="card-title text-center fs-1">{name}</h5>
+              <div className="product-price ps-2">
+                <p className="text-danger fs-2 fw-bold">
+                  $
+                  <span className="damping-price">
+                    {(price * 0.8).toFixed(2)}
+                  </span>
+                  <span className="h5 text-dark text-decoration-line-through">
+                    {parseFloat(price).toFixed(2)}
+                  </span>
+                </p>
+              </div>
+              <div className="d-flex justify-content-center align-items-center ">
+                <div className="quantity-controller px-3 py-3 d-flex border border-3  fw-bold  rounded-pill">
+                  <Button
                     onClick={() => handleMinus(id)}
-                    className="btn btn-warning"
+                    className="me-3 btn-warning fw-bold"
                   >
                     <HiMinus />
-                  </button>
+                  </Button>
 
-                  <p className="m-auto p-3 fs-3">{quant}</p>
+                  <p className="m-auto  fs-3">{quant}</p>
 
-                  <button
+                  <Button
                     onClick={() => handlePlus(id)}
-                    className="btn btn-warning"
+                    className="ms-3 btn-warning fw-bold"
                   >
                     <HiPlus />
-                  </button>
+                  </Button>
                 </div>
-              </Card.Body>
-
-              <div className="d-flex justify-content-center align-items-center">
-                <Button variant="danger" onClick={() => deleteProducts(id)}>
-                  <FaTrashAlt className=" me-2 " />
-                  Remove
-                </Button>
               </div>
-
-              <Card.Subtitle className="text-start my-3  text-muted">
-                Product Total: {(price * 0.8 * quant).toFixed(2)}
-              </Card.Subtitle>
-            </Col>
-          </Card>
-        </Row>
+              <Button
+                className="my-3 w-100"
+                variant="danger"
+                onClick={() => deleteProducts(id)}
+              >
+                <FaTrashAlt className="me-2" />
+                Remove
+              </Button>
+              <div className="mt-2">
+                Product Total: $
+                <span className="product-line-price">
+                  {(+price * 0.8 * +quant).toFixed(2)}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 

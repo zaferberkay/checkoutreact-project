@@ -7,43 +7,43 @@ const CardTotal = ({ productList }) => {
   );
 
   return (
-    <>
+    <div className="contain">
       {productList.length ? (
         <div className="border px-5 py-1 m-1 bg-light">
           <table className=" w-100">
             <tbody>
               <tr className="">
-                <th className=" text-start w-25 border-bottom p-1 fs-5">
+                <th className=" text-center w-50 border-bottom p-1 fs-5">
                   SubTotal:
                 </th>
-                <td className="border-bottom text-start fs-5">
+                <td className="border-bottom text-center fs-5">
                   ${subTotal.toFixed(2)}
                 </td>
               </tr>
 
               <tr className="">
-                <th className="text-start w-25 border-bottom p-1 fs-5">
+                <th className="text-center w-50 border-bottom p-1 fs-5">
                   Tax(18%):
                 </th>
-                <td className="border-bottom text-start fs-5">
+                <td className="border-bottom text-center fs-5">
                   ${(subTotal * taxRate).toFixed(2)}
                 </td>
               </tr>
 
               <tr>
-                <th className="text-start w-25 border-bottom p-1 fs-5">
+                <th className="text-center w-50 border-bottom p-1 fs-5">
                   Shipping:
                 </th>
-                <td className="border-bottom text-start fs-5">
+                <td className="border-bottom text-center fs-5">
                   ${shipping.toFixed(2)}
                 </td>
               </tr>
 
               <tr>
-                <th className="text-start w-25 border-bottom p-1 fs-5">
+                <th className="text-center w-50 border-bottom p-1 fs-5">
                   Total:
                 </th>
-                <td className="border-bottom text-start fs-5">
+                <td className="border-bottom text-center fs-5">
                   ${(subTotal + subTotal * taxRate + shipping).toFixed(2)}
                 </td>
               </tr>
@@ -51,9 +51,11 @@ const CardTotal = ({ productList }) => {
           </table>
         </div>
       ) : (
-        <h1 className="display-4 text-danger">No Products</h1>
+        <h1 className="display-4 text-danger text-center">
+          Has No Products yet
+        </h1>
       )}
-    </>
+    </div>
   );
 };
 
