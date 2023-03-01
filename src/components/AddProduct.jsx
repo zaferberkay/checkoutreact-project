@@ -1,7 +1,36 @@
-function AddProduct() {
+import axios from "axios";
+import { useState } from "react";
+
+function AddProduct({ getProducts, productList }) {
+  //* POST
+
+  const [name, setName] = useState("");
+  const [image, setImage] = useState("");
+  const [price, setPrice] = useState();
+  const [amount, setAmount] = useState();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newProduct = { name, image, price, amount };
+
+    postProducts(newProduct);
+    setAmount("");
+    setImage("");
+    setName("");
+    setPrice("");
+  };
+  const postProducts = async (newProduct) => {
+    const BASE_URL = "https://6367ad83f5f549f052d9f2e9.mockapi.io/api/products";
+    try {
+      await axios.post(BASE_URL, newProduct);
+    } catch (error) {
+      console.log(Error);
+    }
+    getProducts();
+  };
   return (
     <div className=" container text-center p-3 fw-bold">
-      <form className="  p-2">
+      <form onSubmit={handleSubmit} className="  p-2">
         <div className="mb-3">
           <label htmlFor="add-name" className="form-label">
             Product Name
@@ -11,7 +40,9 @@ function AddProduct() {
             className="form-control"
             name="name"
             id="add-name"
-            required=""
+            required
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
         <div className="mb-3">
@@ -23,7 +54,9 @@ function AddProduct() {
             className="form-control"
             id="add-price"
             name="price"
-            required=""
+            required
+            value={price}
+            onChange={(e) => setPrice(Number(e.target.value))}
           />
         </div>
         <div className="mb-3">
@@ -35,7 +68,9 @@ function AddProduct() {
             name="amount"
             className="form-control"
             id="add-quantity"
-            required=""
+            required
+            value={amount}
+            onChange={(e) => setAmount(Number(e.target.value))}
           />
         </div>
         <label htmlFor="add-image" className="form-label">
@@ -51,7 +86,9 @@ function AddProduct() {
             id="add-image"
             name="image"
             aria-describedby="basic-addon3"
-            required=""
+            required
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
           />
         </div>
         <div className="text-center">

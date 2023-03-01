@@ -2,12 +2,12 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import AddProduct from "./AddProduct";
 
-function ButtonBar() {
-  const [show, setShow] = useState(false);
-  const [text, setText] = useState("Show Product Bar");
+function ButtonBar({ getProducts, productList }) {
+  const [show, setShow] = useState(true);
+  const [text, setText] = useState("Hide Add Product Bar");
   const toggle = () => {
     setShow(!show);
-    const buttonText = show ? "Show Product Bar" : "Hide Product Bar";
+    const buttonText = show ? "Show Add Product Bar" : "Hide Add Product Bar";
     setText(buttonText);
   };
 
@@ -17,7 +17,9 @@ function ButtonBar() {
         <Button onClick={() => toggle()} variant="secondary" size="lg">
           {text}
         </Button>
-        {show && <AddProduct />}
+        {show && (
+          <AddProduct productList={productList} getProducts={getProducts} />
+        )}
       </div>
     </>
   );
